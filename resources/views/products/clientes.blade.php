@@ -21,10 +21,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Cliente / Empresa</th>
+                        <th>Agencia</th>
                         <th>Contacto Principal</th>
                         <th>Email</th>
-                        <th>Teléfono</th>
+                        <th>Telefono</th>
                         <th>Estado</th>
                         <th style="text-align:center;">Acciones</th>
                     </tr>
@@ -38,9 +38,7 @@
                                 <div class="client-name">{{ $cliente->name_client }}</div>
                                 <div class="client-type">
                                     {{ $cliente->contactos->count() }} contacto(s)
-                                    @if($cliente->contactos->count() > 1)
-                                        — <a href="#" class="link-detalle" onclick="abrirDetalle({{ $cliente->id_client }})">ver todos</a>
-                                    @endif
+                                   
                                 </div>
                             </td>
                             <td>{{ $principal ? $principal->name . ' ' . $principal->last_names : '---' }}</td>
