@@ -13,10 +13,17 @@ public function index(Request $request)
 {
     $query = $request->input('search');
 
-    $clientes = Cliente::when($query, function ($q) use ($query) {
-        return $q->where('name_client', 'LIKE', "%{$query}%")
-                 ->orWhere('id_client', 'LIKE', "%{$query}%");
-    })->paginate(10); 
+    $clientes = Cliente::with(['contactos' => function ($q) {
+            $q->orderBy('es_principal', 'desc'); 
+        }])
+        ->when($query, function ($q) use ($query) {
+            return $q->where('name_client', 'LIKE', "%{$query}%")
+                     ->orWhere('id_client', 'LIKE', "%{$query}%")
+                     ->orWhereHas('contactos', fn($q) => 
+                         $q->where('name', 'LIKE', "%{$query}%")
+                           ->orWhere('email', 'LIKE', "%{$query}%")
+                     );
+        })->paginate(10);
 
     return view('products.clientes', compact('clientes'));
 }

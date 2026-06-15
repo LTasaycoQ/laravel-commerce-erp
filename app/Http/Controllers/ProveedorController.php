@@ -8,21 +8,20 @@ use Illuminate\Http\Request;
 
 class ProveedorController extends Controller
 {
-   
-public function index(Request $request)
+ public function index(Request $request)
 {
     $query = $request->input('search');
 
-    $proveedores = Proveedor::when($query, function ($q) use ($query) {
-        return $q->where('supplier_name', 'LIKE', "%{$query}%")
-                 ->orWhere('id_categories_suppliers', 'LIKE', "%{$query}%")
-                 ->orWhere('id_destinations', 'LIKE', "%{$query}%")
-                 ->orWhere('created_at', 'LIKE', "%{$query}%");
-    })->paginate(10); 
+    $proveedores = Proveedor::with(['categoria', 'destino'])
+        ->when($query, function ($q) use ($query) {
+            return $q->where('supplier_name', 'LIKE', "%{$query}%")
+                     ->orWhereHas('categoria', fn($q) => $q->where('category_name', 'LIKE', "%{$query}%"))
+                     ->orWhereHas('destino', fn($q) => $q->where('destination_name', 'LIKE', "%{$query}%"))
+                     ->orWhere('created_at', 'LIKE', "%{$query}%");
+        })->paginate(10);
 
     return view('products.suppliers', compact('proveedores'));
 }
-
 
     // public function store(Request $request)
     // {

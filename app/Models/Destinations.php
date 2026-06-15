@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Destinations extends Model
 {
     use HasFactory;
@@ -12,7 +12,7 @@ class Destinations extends Model
     protected $primaryKey = 'id_destinations';
 
     protected $fillable = [
-        'destinations_name',
+        'destination_name',
     ];
 
 
