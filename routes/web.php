@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProveedorController;
-use App\Http\Controllers\UserController; 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 
 // 1. Cargar vista de login
 Route::get('/', function () {
@@ -21,14 +22,13 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,
 // RUTAS PROTEGIDAS PARA USUARIOS LOGUEADOS (AUTH)
 // =======================================================================
 Route::middleware('auth')->group(function () {
-    
+
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Panel Principal
-    Route::get('/dashboard', function () {
-        return view('products.dashboard');
-    });
+    // Dashboard ← único cambio respecto a tu versión original
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
     Route::get('/proveedores', function () {
         return view('products.suppliers');
@@ -40,12 +40,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/proveedores', [ProveedorController::class, 'index'])->name('proveedores.index');
 
-  
+
     // =======================================================================
     // 🔒 RUTAS EXCLUSIVAS PARA ADMINISTRADORES (role:admin)
     // =======================================================================
     Route::middleware('role:admin')->group(function () {
-        
+
        Route::get('/users', [UserController::class, 'index'])->name('admin.users');
         Route::post('/admin/users', [UserController::class, 'store']);
     });

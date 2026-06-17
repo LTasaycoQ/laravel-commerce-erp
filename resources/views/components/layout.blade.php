@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard_layout.css') }}">
     <link rel="stylesheet" href="{{ asset('css/clientes.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-   
 
+    @stack('styles')
 </head>
 <body>
     <div class="dashboard-layout">
@@ -33,7 +33,7 @@
                                 <i class="bi bi-grid-1x2"></i>
                                 <span class="link-text">Dashboard</span>
                             </a>
-                          
+
                         </nav>
                     </div>
 
@@ -98,9 +98,9 @@
                     <button class="toggle-btn-header" id="toggleBtnHeader" title="Expandir/Contraer menú">
                         <i class="bi bi-layout-sidebar"></i>
                     </button>
-                   
+
                 </div>
-                
+
                 <div class="subnav-right">
                     <button class="subnav-icon-btn" title="Notificaciones">
                         <i class="bi bi-bell"></i>
@@ -121,7 +121,7 @@
                                 <i class="bi bi-chevron-down"></i>
                             </button>
                         </div>
-               
+
                 </div>
             </header>
 
