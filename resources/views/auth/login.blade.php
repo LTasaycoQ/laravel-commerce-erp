@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión — Fiesta Tours</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">    
+
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -160,22 +162,46 @@
         .forgot:hover { text-decoration: underline; }
 
         .btn-login {
-            width: 100%; padding: 12px;
-            background: #e63232; border: none;
-            border-radius: 8px; color: #fff;
-            font-size: 15px; font-weight: 600;
-            cursor: pointer; letter-spacing: .2px;
-            transition: background .15s, transform .1s;
-        }
-        .btn-login:hover  { background: #c42a2a; }
-        .btn-login:active { transform: scale(.98); }
+         width: 100%;
+         height: 44px;
+         background: #b4413b;
+         color: #fff;
+         border: none;
+         border-radius: 10px;
+         font-size: 14px;
+         font-weight: 600;
+         font-family: 'Raleway', sans-serif;
+         cursor: pointer;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 8px;
+         letter-spacing: 0.03em;
+         transition: opacity 0.15s;
+     }
+
+        
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .spinning {
+        animation: spin 1s linear infinite;
+    }
+
+    .btn-login.btn-loading {
+        opacity: 0.65;
+        cursor: not-allowed;
+        background: #6d4138;
+    }
     </style>
 </head>
 <body>
 
     {{-- FONDO: imagen completa --}}
     <div class="bg-image">
-        <img src="https://www.machupicchuexploringperu.com/wp-content/uploads/2023/07/header-slider-machu-picchu-one-day-tour-1920x1080-1-2.jpg"
+        <img src="https://res.cloudinary.com/dlgeap8h0/image/upload/v1778686647/iStock-1702599131_ik3v6x.jpg"
              alt="">
     </div>
 
@@ -226,7 +252,7 @@
                 <div class="error-box">{{ $errors->first() }}</div>
             @endif
 
-            <form action="{{ url('/login') }}" method="POST">
+            <form id="login-form" action="{{ url('/login') }}" method="POST">
                 @csrf
 
                 <label for="user">Correo electrónico</label>
@@ -241,11 +267,28 @@
 
                 <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
 
-                <button type="submit" class="btn-login">Iniciar Sesión</button>
+                <button type="submit" class="btn-login" id="btn-submit">
+                        <span>Iniciar sesión</span> <i class="ti ti-arrow-right"></i>
+                    </button>
             </form>
         </div>
 
     </div>
+c
+
+    <script>
+         document.getElementById('login-form').addEventListener('submit', function(e) {
+            const btn = document.getElementById('btn-submit');
+            
+            btn.innerHTML = `
+                <i class="ti ti-loader-2 spinning"></i> 
+                <span>Iniciando...</span>
+            `;
+            
+            btn.disabled = true;
+            btn.classList.add('btn-loading');
+        });
+    </script>
 
 </body>
 </html>
