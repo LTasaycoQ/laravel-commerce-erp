@@ -3,40 +3,6 @@
     
     <h1>Administración de Usuarios</h1>
 
-   <style>
-    .form-design{
-        display:flex;
-        gap: 20px;
-    }
-    .containe--feature{
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        margin-bottom:30px;
-    }
-
-    .container-dashboar_user{
-        display:flex;
-        flex-wrap:wrap;
-    }
-    .container-card{
-        display:flex;
-        width:200px;
-        background-color:white;
-        border-radius:10px;
-        flex-direction:column;
-        gap:10px;
-        padding:1rem;
-    }
-    .title_dashboard-user{
-        font-size:15px;
-        font-weight:800;
-        text-transform:uppercase;
-    }
-    .text-resulado{
-        font-weight:900;
-    }
-   </style> 
     @if(session('success'))
         <div class="alert alert-success mb-3">
             {{ session('success') }}
@@ -196,3 +162,39 @@
     </script>
 
 </x-layout>
+
+
+<style>
+    .form-design{
+        display:flex;
+        gap: 20px;
+    }
+    .containe--feature{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:30px;
+    }
+
+    .container-dashboar_user{
+        display:flex;
+        flex-wrap:wrap;
+    }
+    .container-card{
+        display:flex;
+        width:200px;
+        background-color:white;
+        border-radius:10px;
+        flex-direction:column;
+        gap:10px;
+        padding:1rem;
+    }
+    .title_dashboard-user{
+        font-size:15px;
+        font-weight:800;
+        text-transform:uppercase;
+    }
+    .text-resulado{
+        font-weight:900;
+    }
+</style> 

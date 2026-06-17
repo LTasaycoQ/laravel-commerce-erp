@@ -8,7 +8,7 @@ use App\Http\Controllers\UserController;
 
 // 1. Cargar vista de login
 Route::get('/', function () {
-    return view('products.login');
+    return view('auth.login');
 })->name('login');
 
 Route::get('/login', function () {
